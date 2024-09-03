@@ -1,0 +1,79 @@
+{{#if logged_in}}
+<div class="title-box" id="user-id" user-id="{{user.id}}">
+  <div class="container">
+    <div class="box">Your Dashboard</div>
+  </div>
+</div> 
+
+{{else}}
+
+<div class="title-box">
+  <div class="container">
+    <div class="box">The Tech Blog</div>
+  </div>
+</div>  
+
+{{/if}}
+
+<div class="new-post-section">
+  <div class="container">
+{{!-- Space holder to take up space that form or previous posts will occupy to look like the challenge image --}}
+    
+    
+  
+    {{#if userPosts.length}}
+    {{#each userPosts as |userPost|}}
+    <div class="user-posts" id="{{userPost.id}}"> 
+      <div class="post-title-bar">
+        <p class="user-post-title">{{userPost.title}}</p>
+        <p class="user-post-date">{{format_date userPost.date_created}}</p>
+      </div>
+      <div class="update-post-form" id="update-post-form">
+        <h2>Edit Post</h2>
+          <div class="form-group">
+            <label for="post-text-{{userPost.id}}">Title</label>
+            <input type="text" value="{{userPost.title}}" class="update-post-title" id="update-post-title{{post.id}}">
+          </div>
+          <div class="form-group">
+            <label for="post-text-{{userPost.id}}">Content</label>
+            <input type="text" value="{{userPost.content}}" class="update-post-content" id="update-post-content{{post.id}}">
+          </div>
+        <button class="update-post-btn" post-id="{{userPost.id}}">Update Post</button>
+        <button class="delete-post-btn" post-id="{{userPost.id}}">Delete Post</button>
+      </div>
+    </div>
+    {{else}}
+    <div class="space-holder"></div>   
+    {{/each}}
+    {{/if}}
+    
+    {{!-- Hidden until button click --}}
+    <form class="post-form" id="{{user.id}}">
+      <h2>Create new post</h2>
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input class="form-input" type="text" name="title" id="title" />
+      </div>
+      <div class="form-group">
+        <label for="content">Content</label>
+        <input class="form-input" type="input" name="content" id="content" />
+      </div>
+      <div class="form-group">
+        <button class="" type="submit">Create</button>
+      </div>
+    </form>
+    <button class="new-post-btn">New Post</button>    
+  </div>
+</div>
+
+
+
+
+
+
+<script src="./js/dashboard.js"></script>
+
+
+
+
+
