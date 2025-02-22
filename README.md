@@ -1,10 +1,8 @@
 # Tech Blog
 
-  ## License: [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [MIT License](https://opensource.org/licenses/MIT)
-
   ## Table of Contents
   * [Description](#description)
-  * [Deployed URL](#deployed-url)
+  * [Deployed URL](#demonstration-url)
   * [Installation Instructions](#installation)
   * [Usage Instructions](#usage)
   * [Screenshots of deployed App](#screenshots)
@@ -12,10 +10,12 @@
   * [Questions](#questions)
   
   ## Description: 
-  This app will be a full stack app, using handlebars rendered html and a SQL database for storing information. Users can view all posts made by everyone on the homescreen and comment on that post. Users can also create an account and login to make posts of their own and edit or delete posts.
+  This app was originally submitted as the MVC code Challenge for the Rutgers Web Development Bootcamp. https://github.com/zmuda44/Tech-blog-site
+  
+  Users can view all posts made by everyone on the homescreen and comment on that post. Users can also create an account and login to make posts of their own and edit or delete posts.
 
-  ## Deployed-URL:
-  need new deployed link
+  ## Demonstration-URL:
+  need new deployed link (link to vid)
 
   ## Installation: 
   First, clone this repository to your computer using 'git@github.com:zmuda44/CMS-blog-site.git'. cd into the folder containing the server.js. Run 'npm i' from the command line to create your node modules. A package.json will be cloned with all proper dependencies and npm i will install all modules from these dependencies. You will also need to create a .env file with your database name, database user name and database passwords in the main directory. Search dotenv in your web browser of choice for more information. cd into the folder containing the schema.sql and log into your Postgres account. You will first need to download Postgres and get a database server up and running. Run '\i schema' from the postgres command line to create your database on the server. Exit out of the Postgres command by typing '\q'. You will once again cd into the folder containing server.js and start your server using 'npm run start'. This will populate the columns in the database you created from Sequelize. Stop your server, and run 'npm run seed' from the command line. The package.json file will come with the scripts and dependencies to run these commands, and the 'npm i' at the beginning will download the modules. Once you have seeded the database, you are ready to start using the app.
