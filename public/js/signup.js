@@ -18,14 +18,14 @@ const signupFormPost= async (event) => {
         headers: { 'Content-Type': 'application/json' },
       }); 
       
-      // const errorMessage = await response.json()
+      const errorMessage = await response.json()
   
       if (response.ok) {
         console.log(response)
         document.location.replace('/dashboard');
 
       } else {
-        alert(response.statusText);
+        alert(errorMessage.message || response.statusText);
       }
     }
   };

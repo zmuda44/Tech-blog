@@ -6,6 +6,14 @@ const { blogUser } = require('../../models');
 router.post('/', async (req, res) => {
 
   try {
+    // Check if the username already exists in the database
+    const existingUser = await blogUser.findOne({ where: { username: req.body.username } });
+
+    if (existingUser) {
+      // If the username already exists, send a response with an error message
+      return res.status(400).json({ message: 'Username already exists. Please choose a different one.' });
+    }
+
     const userData = await blogUser.create(req.body)
 
     req.session.save(() => {
