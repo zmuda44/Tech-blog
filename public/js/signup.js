@@ -12,9 +12,9 @@ const signupFormPost= async (event) => {
         method: 'POST',
         body: JSON.stringify({ username, password }),
         headers: { 'Content-Type': 'application/json' },
-      });
-
-    
+      }); 
+      
+      // const errorMessage = await response.json()
   
       if (response.ok) {
         console.log(response)

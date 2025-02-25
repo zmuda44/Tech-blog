@@ -14,13 +14,13 @@ const loginFormPost = async (event) => {
       headers: { 'Content-Type': 'application/json' },
     });
 
-    console.log(response)
+    const errorMessage = await response.json()    
 
     if (response.ok) {
       // If successful, redirect the browser to the profile page
       document.location.replace('/dashboard');
     } else {
-      alert('Failed to log in');  
+      alert(errorMessage.message);  
     }
   }
 };

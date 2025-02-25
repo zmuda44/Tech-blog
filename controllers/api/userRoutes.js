@@ -5,7 +5,6 @@ const { blogUser } = require('../../models');
 //post request that handles signup button login page and found in public/login.js.  request to /api/users
 router.post('/', async (req, res) => {
 
- 
   try {
     const userData = await blogUser.create(req.body)
 
@@ -33,6 +32,7 @@ router.post('/login', async (req, res) => {
     if(!userData) {
       res.status(600).json({ message: "No user data found" });
       console.log("no user DATA!!!!")
+      return;
     }
 
     const validPassword = await userData.checkPassword(req.body.password);
@@ -41,7 +41,7 @@ router.post('/login', async (req, res) => {
       console.log("no valid password")
       res
         .status(400)
-        .json({ message: 'Incorrect email or password, please try again' });
+        .json({ message: 'Incorrect password for Username, please try again' });
       return;
     }
 
