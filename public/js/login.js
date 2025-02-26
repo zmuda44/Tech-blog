@@ -1,10 +1,12 @@
+const usernameInput = document.getElementById('username-login')
+const passwordInput = document.getElementById('password-login')
 
 const loginFormPost = async (event) => {
   event.preventDefault();
 
-  // Collect values from the login form
-  const username = document.getElementById('username-login').value.trim();
-  const password = document.getElementById('password-login').value.trim();
+  // Collect values from the login form  
+  const username = usernameInput.value.trim();
+  const password = passwordInput.value.trim();
   
   if (username && password) {
 
@@ -22,7 +24,11 @@ const loginFormPost = async (event) => {
     } else {
       alert(errorMessage.message);  
     }
-  }
+  };
+
+  //Clear input fields
+  usernameInput.value = "";
+  passwordInput.value = "";
 };
 
 document.querySelector('.login-form-submit').addEventListener("click", loginFormPost)
