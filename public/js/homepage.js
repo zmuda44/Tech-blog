@@ -1,10 +1,16 @@
 const cardsEl = document.getElementsByClassName('card')
 const commentBtnEl = document.getElementsByClassName('comment-btn')
+const collapseBtn = document.getElementsByClassName("collapse-comment-box")
 
 function displayCommentBox () {
-  console.log()
-    const commentBoxEl = this.querySelector('.comments')
-    commentBoxEl.style.display = "block"    
+  const commentBoxEl = this.querySelector('.comments')
+  commentBoxEl.style.display = "block"    
+}
+
+function hideCommentBox (event) {
+  event.stopPropagation();
+  const commentBoxEl = this.parentElement;  // can also write const commentBoxEl = this.closest(".comments");
+  commentBoxEl.style.display = "none";    
 }
 
 const submitComment = async (content, post_id, user_id) => {
@@ -56,22 +62,24 @@ const loginFormPost = async (event) => {
     }
   };
 
-
-
-
-
-
 for (card of cardsEl) {
-card.addEventListener('click', displayCommentBox)
+  card.addEventListener('click', displayCommentBox);
 }
 
 for (btn of commentBtnEl) {
   btn.addEventListener('click', (e) => {
-    const postId = e.target.getAttribute('data-post-id')
-    const commentContent = document.getElementById("comment-input-post"+postId).value.trim()
-    const userId = document.getElementById('user-welcome').getAttribute('data-user-id')
-    submitComment(commentContent, postId, userId)
+    const postId = e.target.getAttribute('data-post-id');
+    const commentContent = document.getElementById("comment-input-post"+postId).value.trim();
+    const userId = document.getElementById('user-welcome').getAttribute('data-user-id');
+    submitComment(commentContent, postId, userId);
   })
 }
+
+for (btn of collapseBtn) {
+  btn.addEventListener("click", hideCommentBox);
+}
+
+
+
 
 

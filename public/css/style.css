@@ -88,6 +88,12 @@ header a {
     padding: 5px; 
 }
 
+.comment-box form {
+    display: flex;
+    flex-direction: column;
+    margin: 20px 0;
+}
+
 .comment-box input {
     height: 50px;
 }
