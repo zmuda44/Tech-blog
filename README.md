@@ -2,7 +2,7 @@
 
   ## Table of Contents
   * [Description](#description)
-  * [Deployed URL](#demonstration-url)
+  * [Demonstration Video](#demonstration-video)
   * [Installation Instructions](#installation)
   * [Usage Instructions](#usage)
   * [Screenshots of deployed App](#screenshots)
@@ -12,9 +12,11 @@
   ## Description: 
   This app was originally submitted as the MVC code Challenge for the Rutgers Web Development Bootcamp. https://github.com/zmuda44/Tech-blog-site
   
-  Users can view all posts made by everyone on the homescreen and comment on that post. Users can also create an account and login to make posts of their own and edit or delete posts.
+  Viewers can view all posts made by everyone on the homescreen and logged in users can comment on individual posts. Users can also create an account and login to make posts of their own and edit or delete posts.
 
-  ## Demonstration-URL:
+  Improvements since class submission: Added error handling to login and signup form. Specific alerts given if no Username is found, or if Username is found but Password is incorrect on login. Alerts will also be given is Username is already taken upon Signup, or if Password doesn't meet character length requirement.
+
+  ## Demonstration-video:
   need new deployed link (link to vid)
 
   ## Installation: 
