@@ -25,11 +25,20 @@ router.get('/', async (req, res) => {
             attributes: ['content', 'user_id', 'date_created']
           }
         ],        
-      });    
+      });   
+      
+      const userData = await blogUser.findByPk(req.session.user_id)
 
+      if(!userData) {
+        console.log("no user")
+      }
+    
       const posts = postData.map((post) => post.get({ plain: true }));
+      const user = userData ? userData.get({ plain: true }) : null;
 
-      res.render('homepage', { posts, logged_in: req.session.logged_in })     
+      console.log(user)
+
+      res.render('homepage', { posts, logged_in: req.session.logged_in, user })     
      
     } catch (err) {
       res.status(500).json(err);

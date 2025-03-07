@@ -49,18 +49,7 @@ blogUser.init(
   }
 );
 
-// Many-to-many relationship to represent following
-blogUser.belongsToMany(blogUser, {
-  foreignKey: 'follower_id',  // The user who is following
-  through: 'user_follows',  // The join table
-  as: 'following',  // Alias for following users
-});
 
-blogUser.belongsToMany(blogUser, {
-  foreignKey: 'followed_id',  // The user being followed
-  through: 'user_follows',  // The join table
-  as: 'followers',  // Alias for followers
-});
 
 module.exports = blogUser;
 

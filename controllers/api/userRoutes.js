@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { blogUser } = require('../../models');
+const { blogUser, userFollows } = require('../../models');
 // const bcrypt = require('bcryptjs');
 
 //post request that handles signup button login page and found in public/login.js.  request to /api/users
@@ -79,6 +79,14 @@ router.post('/logout', (req, res) => {
     res.status(404).end();
   }
 });
+
+router.post('/:userId/follow', async (res, req) => {
+
+  console.log(req.session.user_id)
+
+  const userData = await blogUser.create(req.body)
+
+})
 
 
 module.exports = router;
