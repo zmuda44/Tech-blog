@@ -1,9 +1,12 @@
 const cardsEl = document.getElementsByClassName('card')
+const cardsH2El = document.querySelectorAll('.card h2')
 const commentBtnEl = document.getElementsByClassName('comment-btn')
 const collapseBtn = document.getElementsByClassName("collapse-comment-box")
 
 function displayCommentBox () {
-  const commentBoxEl = this.querySelector('.comments')
+  const cardEl = this.parentElement.parentElement
+  console.log(cardEl)
+  const commentBoxEl = cardEl.querySelector('.comments')
   commentBoxEl.style.display = "block"    
 }
 
@@ -62,8 +65,8 @@ const loginFormPost = async (event) => {
     }
   };
 
-for (card of cardsEl) {
-  card.addEventListener('click', displayCommentBox);
+for (cardH2 of cardsH2El) {
+  cardH2.addEventListener('click', displayCommentBox);
 }
 
 for (btn of commentBtnEl) {

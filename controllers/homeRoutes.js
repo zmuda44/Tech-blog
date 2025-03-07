@@ -4,8 +4,7 @@ const withAuth = require('../utils/auth');
 
 
 // get request to homepage
-router.get('/', async (req, res) => {
- 
+router.get('/', async (req, res) => { 
 
     try {
       // Get all projects and JOIN with user data
@@ -13,13 +12,13 @@ router.get('/', async (req, res) => {
         include: [
           {
             model: blogUser,
-            attributes: ['username'],
+            attributes: ['id', 'username'],
           },
           {
             model: Comment,
             include: [
               {model: blogUser,
-                attributes: ['username']
+                attributes: ['id', 'username']
               }
             ],
             attributes: ['content', 'user_id', 'date_created']
@@ -35,8 +34,6 @@ router.get('/', async (req, res) => {
     
       const posts = postData.map((post) => post.get({ plain: true }));
       const user = userData ? userData.get({ plain: true }) : null;
-
-      console.log(user)
 
       res.render('homepage', { posts, logged_in: req.session.logged_in, user })     
      
@@ -84,6 +81,10 @@ router.get('/dashboard', withAuth, async (req, res) => {
   } catch (err) {
   res.status(500).json(err);
   }
+})
+
+router.get('/profile/:userId', (req, res) => {
+  console.log(req.params)
 })
 
 
