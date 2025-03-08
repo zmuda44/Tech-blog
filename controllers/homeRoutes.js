@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { blogUser, Post, Comment } = require('../models');
+const { blogUser, Post, Comment, userFollows } = require('../models');
 const withAuth = require('../utils/auth');
 
 
@@ -83,14 +83,15 @@ router.get('/dashboard', withAuth, async (req, res) => {
 })
 
 router.get('/profile/:userId', async (req, res) => {
-  const userId = req.params.userId
+  const profileUserId = req.params.userId
+  // const userId = req.sessions.user_id
 
   try {
-    const userData = await blogUser.findByPk(userId)
+    const profileUserData = await blogUser.findByPk(profileUserId)
 
     const postData = await Post.findAll({
       where: {
-        user_id: userId 
+        user_id: profileUserId 
       },
       include: [
         {
@@ -103,9 +104,25 @@ router.get('/profile/:userId', async (req, res) => {
           attributes: ['content', 'user_id', 'date_created']
         }
       ],        
-    });   
+    }); 
 
-    const profileUser = userData ? userData.get({ plain: true }) : null; 
+    let followerData
+
+    if(req.session.user_id) {
+      followerData = await userFollows.findOne({
+        where: {
+          follower_id: req.session.user_id,
+          followed_id: profileUserId
+        }
+      })   
+    }   
+
+    console.log(followerData)
+    
+    const followed = followerData ? followerData.get({plain: true}) : null;
+    console.log(followed)
+    
+    const profileUser = profileUserData ? profileUserData.get({ plain: true }) : null; 
     
     const profileUserPosts = postData.map((post) => post.get({ plain: true }));
    
