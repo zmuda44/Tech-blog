@@ -106,24 +106,60 @@ router.get('/profile/:userId', async (req, res) => {
       ],        
     }); 
 
-    let followerData
+    let followerCheckData
 
     if(req.session.user_id) {
-      followerData = await userFollows.findOne({
+      followerCheckData = await userFollows.findOne({
         where: {
           follower_id: req.session.user_id,
           followed_id: profileUserId
         }
       })   
-    }   
+    } 
+    
+    // const profileUserFollowerData = await userFollows.findbyPk(profileUserId, {
+    //   // where: {
+    //   //   followed_id: profileUserId
+    //   // },
+    //   include: [
+    //     // {
+    //     //   model: blogUser,  // Include the followers of this user
+    //     //   through: userFollows, // Get 'id' and 'username' of followers
+    //     //   as: 'followers',  // Alias for followers (defined in your association)          
+    //     //   attributes: ['id', 'username'],         
+    //     // }
+    //     {
+    //       model: blogUser,
+    //       attributes: ['id', 'username']
+    //     }
+    //   ],
+    // })
 
-    const followed = followerData ? followerData.get({plain: true}) : null;  
+    const profileUserFollowerData = await userFollows.findAll({
+      where: {
+        followed_id: profileUserId
+      },
+      include: [
+        {
+          model: blogUser,
+          through: userFollows,
+          as: 'following',
+          // attributes: ['id', 'username']
+        }
+      ]
+    })
+
+    // console.log(profileUserFollowerData)    
+
+    //const profileUserFollowers = profileUserFollowerData.map((follower) => follower.get({ plain: true }));
+
+    const followed = followerCheckData ? followerCheckData.get({plain: true}) : null;  
     
     const profileUser = profileUserData ? profileUserData.get({ plain: true }) : null; 
     
     const profileUserPosts = postData.map((post) => post.get({ plain: true }));
    
-    res.render('profile', {profileUser, user: req.session.user_id, followed, profileUserPosts})
+    res.render('profile', {profileUser, user: req.session.user_id, followed, profileUserPosts })
   }
   catch (err) {
     res.status(500).json(err);
