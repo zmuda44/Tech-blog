@@ -83,8 +83,41 @@ router.get('/dashboard', withAuth, async (req, res) => {
   }
 })
 
-router.get('/profile/:userId', (req, res) => {
-  console.log(req.params)
+router.get('/profile/:userId', async (req, res) => {
+  const userId = req.params.userId
+
+  try {
+    const userData = await blogUser.findByPk(userId)
+
+    const postData = await Post.findAll({
+      where: {
+        user_id: userId 
+      },
+      include: [
+        {
+          model: Comment,
+          include: [
+            {model: blogUser,
+              attributes: ['id', 'username']
+            }
+          ],
+          attributes: ['content', 'user_id', 'date_created']
+        }
+      ],        
+    });   
+
+    const user = userData ? userData.get({ plain: true }) : null; 
+    
+    const userPosts = postData.map((post) => post.get({ plain: true }));
+
+    console.log(userPosts)
+   
+     res.render('profile', {user, userPosts})
+  }
+
+  catch (err) {
+    res.status(500).json(err);
+  }
 })
 
 
