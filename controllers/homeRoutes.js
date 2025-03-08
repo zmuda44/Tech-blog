@@ -83,9 +83,10 @@ router.get('/dashboard', withAuth, async (req, res) => {
 })
 
 router.get('/profile/:userId', async (req, res) => {
+  // get profile user id from URL
   const profileUserId = req.params.userId
-  // const userId = req.sessions.user_id
 
+  // find profile user by id and display their posts and the comments that goes along with them
   try {
     const profileUserData = await blogUser.findByPk(profileUserId)
 
@@ -106,6 +107,7 @@ router.get('/profile/:userId', async (req, res) => {
       ],        
     }); 
 
+    // declare variable to check if the user that is currently logged in is already following the profile user
     let followerCheckData
 
     if(req.session.user_id) {
@@ -116,50 +118,36 @@ router.get('/profile/:userId', async (req, res) => {
         }
       })   
     } 
-    
-    // const profileUserFollowerData = await userFollows.findbyPk(profileUserId, {
-    //   // where: {
-    //   //   followed_id: profileUserId
-    //   // },
-    //   include: [
-    //     // {
-    //     //   model: blogUser,  // Include the followers of this user
-    //     //   through: userFollows, // Get 'id' and 'username' of followers
-    //     //   as: 'followers',  // Alias for followers (defined in your association)          
-    //     //   attributes: ['id', 'username'],         
-    //     // }
-    //     {
-    //       model: blogUser,
-    //       attributes: ['id', 'username']
-    //     }
-    //   ],
-    // })
 
+    //Get profile user followers and display usernames
+    // Couldn't get a join to work so had to do all this a workaround
     const profileUserFollowerData = await userFollows.findAll({
       where: {
         followed_id: profileUserId
-      },
-      include: [
-        {
-          model: blogUser,
-          through: userFollows,
-          as: 'following',
-          // attributes: ['id', 'username']
-        }
-      ]
+      }
+    })  
+
+    const profileUserFollowers = profileUserFollowerData.map((follower) => follower.get({ plain: true }));
+    profileUserFollowersId = profileUserFollowers.map((followerObject) => followerObject.id)
+    
+    const followersData = await blogUser.findAll({
+      where: {
+        id: profileUserFollowersId
+      }
     })
 
-    // console.log(profileUserFollowerData)    
+    // Get raw data out of database objects
 
-    //const profileUserFollowers = profileUserFollowerData.map((follower) => follower.get({ plain: true }));
+    const followers = followersData.map((follower) => follower.get({plain: true}))
 
     const followed = followerCheckData ? followerCheckData.get({plain: true}) : null;  
     
     const profileUser = profileUserData ? profileUserData.get({ plain: true }) : null; 
     
     const profileUserPosts = postData.map((post) => post.get({ plain: true }));
-   
-    res.render('profile', {profileUser, user: req.session.user_id, followed, profileUserPosts })
+
+    // render all the data to the profile page   
+    res.render('profile', {profileUser, user: req.session.user_id, followed, followers, profileUserPosts })
   }
   catch (err) {
     res.status(500).json(err);

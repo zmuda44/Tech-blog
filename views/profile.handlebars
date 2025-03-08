@@ -11,45 +11,7 @@
     <h3>Login to follow this uer</h3>
     {{/if}}
 
-  <div class="all-posts">
-
-  {{#if profileUserPosts.length}}
-
-  {{#each userPosts as |post| }}
-  <div class="card" id="{{post.id}}">
-    <div class="title">
-      <h2> {{post.title}} </h2>
-    </div>
-    <div class="content">
-      <p> {{post.content}} </p>
-    </div>
-    <div class="comments">
-      <button class="collapse-comment-box">Collapse Box</button>
-      {{#each comments as |comment|}}
-        <div class="comment">
-          <p class="comment-content">{{comment.content}}</p>
-          {{#if blog_user.username}}
-          <p class="user-comment">-{{blog_user.username}}, {{format_date comment.date_created}}</p>
-          {{else}}
-          <p class="user-comment">-anonymous, {{format_date comment.date_created}}</p>
-          {{/if}}
-        </div>
-      {{/each}}
-
-      <div class="comment-box" data-post-id="{{post.id}}">      
-        <form>
-          <label for="comment-text-{{post.id}}">Comment</label>
-          <input type="text" class="comment-content" id="comment-input-post{{post.id}}">
-          <button class="comment-btn" data-post-id="{{post.id}}">submit</button>
-        </form>        
-      </div>
-    </div>
-    
-  </div>
-  {{/each}}
-
-  {{/if}}
-  </div>
+{{!-- {{> all-posts posts=profileUserPosts comments=comments blog_user=profileUser}} --}}
 
   </div>
 
