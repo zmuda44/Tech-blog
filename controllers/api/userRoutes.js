@@ -32,8 +32,6 @@ router.post('/', async (req, res) => {
 
 
 router.post('/login', async (req, res) => {
-  console.log(req.body)
-
   try {
     const userData = await blogUser.findOne({ where: { username: req.body.username }})
     
@@ -80,12 +78,30 @@ router.post('/logout', (req, res) => {
   }
 });
 
-router.post('/:userId/follow', async (res, req) => {
+router.post('/follow/:userId', async (req, res) => {
 
-  console.log(req.session.user_id)
+  const followedUserId = req.params.userId
+  const userId = req.session.user_id
 
-  const userData = await blogUser.create(req.body)
+  try {
+    const existingFollow = await userFollows.findOne({
+      where: {
+        follower_id: userId,
+        followed_id: followedUserId
+      }
+    });
 
+    if (existingFollow) {
+      return res.status(400).json({ error: 'You are already following this user.' });
+    }
+
+
+    const response = await userFollows.create({follower_id: userId, followed_id: followedUserId})
+    res.status(200).json(response)
+  
+  } catch (err) {
+    console.log(err)
+  }
 })
 
 

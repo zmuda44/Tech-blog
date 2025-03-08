@@ -74,7 +74,6 @@ router.get('/dashboard', withAuth, async (req, res) => {
     const user = userData.dataValues
 
     const userPosts = user.posts.map((post) => post.get({ plain: true }));
-    console.log(userPosts)
   
     res.render('dashboard', {user, userPosts, logged_in: req.session.logged_in})
     
@@ -106,15 +105,12 @@ router.get('/profile/:userId', async (req, res) => {
       ],        
     });   
 
-    const user = userData ? userData.get({ plain: true }) : null; 
+    const profileUser = userData ? userData.get({ plain: true }) : null; 
     
-    const userPosts = postData.map((post) => post.get({ plain: true }));
-
-    console.log(userPosts)
+    const profileUserPosts = postData.map((post) => post.get({ plain: true }));
    
-     res.render('profile', {user, userPosts})
+    res.render('profile', {profileUser, user: req.session.user_id, profileUserPosts})
   }
-
   catch (err) {
     res.status(500).json(err);
   }

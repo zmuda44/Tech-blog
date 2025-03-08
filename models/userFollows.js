@@ -7,7 +7,7 @@ class userFollows extends Model {}
 userFollows.init(
   {
     id: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
       autoIncrement: true,
@@ -22,7 +22,7 @@ userFollows.init(
       allowNull: false,
     },
     followed_id: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       references: {
         model: 'blog_user',
         key: 'id',
@@ -30,6 +30,13 @@ userFollows.init(
       onDelete: 'CASCADE',  // If the user is deleted, remove the follow relationships
       allowNull: false,
     },
+  }, 
+  {
+    sequelize,
+    timestamps: false,
+    freezeTableName: true,
+    underscored: true,
+    modelName: 'user_follows',
   }
 );
 
