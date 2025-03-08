@@ -2,7 +2,11 @@
   <div class="container">
     <h1 id="userInfo" user-id="{{profileUser.id}}">{{profileUser.username}}'s Profile</h1>
     {{#if user}}
-    <button id="follow-button">Follow</button>  
+      {{#if followed}}
+      <button id="follow-button">Unfollow</button>  
+      {{else}}
+      <button id="follow-button">Follow</button>
+      {{/if}}
     {{else}} 
     <h3>Login to follow this uer</h3>
     {{/if}}

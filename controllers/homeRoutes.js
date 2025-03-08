@@ -117,16 +117,13 @@ router.get('/profile/:userId', async (req, res) => {
       })   
     }   
 
-    console.log(followerData)
-    
-    const followed = followerData ? followerData.get({plain: true}) : null;
-    console.log(followed)
+    const followed = followerData ? followerData.get({plain: true}) : null;  
     
     const profileUser = profileUserData ? profileUserData.get({ plain: true }) : null; 
     
     const profileUserPosts = postData.map((post) => post.get({ plain: true }));
    
-    res.render('profile', {profileUser, user: req.session.user_id, profileUserPosts})
+    res.render('profile', {profileUser, user: req.session.user_id, followed, profileUserPosts})
   }
   catch (err) {
     res.status(500).json(err);
