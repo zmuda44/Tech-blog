@@ -14,7 +14,15 @@
   
   Viewers can view all posts made by everyone on the homescreen and logged in users can comment on individual posts. Users can also create an account and login to make posts of their own and edit or delete posts.
 
-  Improvements since class submission: Added error handling to login and signup form. Specific alerts given if no Username is found, or if Username is found but Password is incorrect on login. Alerts will also be given is Username is already taken upon Signup, or if Password doesn't meet character length requirement.
+  Improvements since class submission: 
+  
+  Added error handling to login and signup form. Specific alerts given if no Username is found, or if Username is found but Password is incorrect on login. Alerts will also be given is Username is already taken upon Signup, or if Password doesn't meet character length requirement.
+
+  Added profile page, so when a username is clicked on from their comment, the user will be taken that user's profile page.
+
+  Added functionality to follow and unfollow users for logged in users.
+
+  Better modularity of code with use of partials.
 
   ## Demonstration-video:
   need new deployed link (link to vid)
