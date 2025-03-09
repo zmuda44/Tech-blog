@@ -1,5 +1,5 @@
 <div class="profile">
-  <div class="container">
+  <div class="profile-header">
     <h1 id="userInfo" user-id="{{profileUser.id}}">{{profileUser.username}}'s Profile</h1>
     {{#if user}}
       {{#if followed}}
@@ -10,12 +10,17 @@
     {{else}} 
     <h3>Login to follow this uer</h3>
     {{/if}}
-
-    
-
-{{> all-posts posts=profileUserPosts comments=comments blog_user=profileUser}}
-
   </div>
+
+  <div class="friends">
+    {{#each followers as |follower|}}
+    <ul>
+      <li>{{follower.username}}</li>
+    </ul>
+    {{/each}}
+  </div>
+
+  {{> all-posts posts=profileUserPosts comments=comments blog_user=profileUser}}
 
 </div>
 
