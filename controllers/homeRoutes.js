@@ -5,6 +5,7 @@ const withAuth = require('../utils/auth');
 
 // get request to homepage
 router.get('/', async (req, res) => { 
+  console.log(res)
 
     try {
       // Get all projects and JOIN with user data
@@ -77,6 +78,7 @@ router.get('/dashboard', withAuth, async (req, res) => {
   
     res.render('dashboard', {user, userPosts, logged_in: req.session.logged_in})
     
+
   } catch (err) {
   res.status(500).json(err);
   }
@@ -85,6 +87,8 @@ router.get('/dashboard', withAuth, async (req, res) => {
 router.get('/profile/:userId', async (req, res) => {
   // get profile user id from URL
   const profileUserId = req.params.userId
+
+  console.log('hit')
 
   // find profile user by id and display their posts and the comments that goes along with them
   try {
@@ -121,18 +125,20 @@ router.get('/profile/:userId', async (req, res) => {
 
     //Get profile user followers and display usernames
     // Couldn't get a join to work so had to do all this a workaround
-    const profileUserFollowerData = await userFollows.findAll({
+    const profileUserFollowersData = await userFollows.findAll({
       where: {
         followed_id: profileUserId
-      }
-    })  
-
-    const profileUserFollowers = profileUserFollowerData.map((follower) => follower.get({ plain: true }));
-    profileUserFollowersId = profileUserFollowers.map((followerObject) => followerObject.id)
+      },
+    }) 
     
+
+    const profileUserFollowers = profileUserFollowersData.map((follower) => follower.get({ plain: true }));
+    profileUserFollowersIds = profileUserFollowers.map((followerObject) => followerObject.follower_id)
+    
+    console.log(profileUserFollowersIds)
     const followersData = await blogUser.findAll({
       where: {
-        id: profileUserFollowersId
+        id: profileUserFollowersIds
       }
     })
 
