@@ -220,6 +220,32 @@ header a {
     margin-top: 3px;
 }
 
+/* Begin profile section */
+
+.profile-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.profile-header .friends {
+    border: solid;
+    text-align: center;
+    padding: 10px;
+}
+
+.profile-header .friends ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.profile-header .friends ul li a {
+    display: block;
+    text-decoration: none;
+    color: black;
+    margin-top: 10px;
+}
+
 
 
 
