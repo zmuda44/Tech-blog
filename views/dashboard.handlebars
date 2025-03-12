@@ -1,25 +1,8 @@
-{{#if logged_in}}
-<div class="title-box" id="user-id" user-id="{{user.id}}">
-  <div class="container">
-    <div class="box">Your Dashboard</div>
-  </div>
-</div> 
 
-{{else}}
-
-<div class="title-box">
-  <div class="container">
-    <div class="box">The Tech Blog</div>
-  </div>
-</div>  
-
-{{/if}}
 
 <div class="new-post-section">
   <div class="container">
-{{!-- Space holder to take up space that form or previous posts will occupy to look like the challenge image --}}
-    
-    
+    <div class="dashboard-title"><h2>Welcome to your Dashboard {{user.username}}</h2></div>
   
     {{#if userPosts.length}}
     {{#each userPosts as |userPost|}}
@@ -67,11 +50,6 @@
 </div>
 
 
-
-
-
-
-<script src="./js/dashboard.js"></script>
 
 
 
