@@ -30,6 +30,7 @@ header a {
 }
 
 .title-box .box {
+    color: white;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -43,6 +44,10 @@ header a {
 
 .all-posts {
     margin-top: 20px;
+}
+
+.all-posts a {
+    color: white;
 }
 
 .card {
@@ -225,6 +230,7 @@ header a {
 .profile-header {
     display: flex;
     justify-content: space-between;
+    margin: 20px;
 }
 
 .profile-header .friends {

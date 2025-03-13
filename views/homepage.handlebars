@@ -1,7 +1,12 @@
+<div class="container">
+  {{#if logged_in}}
+   <p id="user-welcome" data-user-id="{{user.id}}">Welcome {{user.username}}</p>
+  {{else}}
+    <p id="user-welcome" >Welcome. Sign up or Login to begin posting!</p>
+  {{/if}}
 
-<p id="user-welcome" data-user-id="{{user.id}}">Welcome {{user.username}}</p>
-
-{{> all-posts posts=posts comments=comments blog_user=blog_user}}
+  {{> all-posts posts=posts comments=comments blog_user=blog_user}}
+</div>
 
 
 
