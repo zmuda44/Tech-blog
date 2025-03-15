@@ -149,7 +149,7 @@ router.get('/profile/:userId', async (req, res) => {
     const profileUserPosts = postData.map((post) => post.get({ plain: true }));
 
     // render all the data to the profile page   
-    res.render('profile', {profileUser, user: req.session.user_id, followed, followers, profileUserPosts })
+    res.render('profile', {profileUser, user: req.session.user_id, logged_in: req.session.logged_in, followed, followers, profileUserPosts })
   }
   catch (err) {
     res.status(500).json(err);

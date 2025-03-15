@@ -97,6 +97,39 @@ router.post('/follow/:userId', async (req, res) => {
 
 
     const response = await userFollows.create({follower_id: userId, followed_id: followedUserId})
+    
+    res.status(200).json(response)
+  
+  } catch (err) {
+    console.log(err)
+  }
+})
+
+//Route to unfollow user
+router.delete('/unfollow/:userId', async (req, res) => {
+
+  const followedUserId = req.params.userId
+  const userId = req.session.user_id
+
+  try {
+    const existingFollow = await userFollows.findOne({
+      where: {
+        follower_id: userId,
+        followed_id: followedUserId
+      }
+    });
+
+    if (!existingFollow) {
+      return res.status(400).json({ error: 'You are not following this user.' });
+    }
+
+    const response = await userFollows.destroy({
+      where: {
+      follower_id: userId,
+      followed_id: followedUserId
+      }
+    });
+
     res.status(200).json(response)
   
   } catch (err) {
