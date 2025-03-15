@@ -11,10 +11,21 @@ async function followUser () {
     headers: { 'Content-Type': 'application/json' },
   });
 
+  if (response.ok) {
+    document.location.reload()
+  }
+
+  else {
+    alert(response.statusText)
+  }
 }
 
 
 
+if (followBtn.innerHTML == "follow") {
+  followBtn.addEventListener('click', followUser)
+}
+else {
+  console.log("unfllow")
+}
 
-
-followBtn.addEventListener('click', followUser)
