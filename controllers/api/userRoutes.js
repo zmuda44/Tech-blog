@@ -97,6 +97,7 @@ router.post('/follow/:userId', async (req, res) => {
 
 
     const response = await userFollows.create({follower_id: userId, followed_id: followedUserId})
+    
     res.status(200).json(response)
   
   } catch (err) {
@@ -106,7 +107,6 @@ router.post('/follow/:userId', async (req, res) => {
 
 //Route to unfollow user
 router.delete('/unfollow/:userId', async (req, res) => {
-  console.log("delete hit")
 
   const followedUserId = req.params.userId
   const userId = req.session.user_id
@@ -122,7 +122,6 @@ router.delete('/unfollow/:userId', async (req, res) => {
     if (!existingFollow) {
       return res.status(400).json({ error: 'You are not following this user.' });
     }
-
 
     const response = await userFollows.destroy({
       where: {
