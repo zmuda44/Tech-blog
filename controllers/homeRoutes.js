@@ -5,7 +5,6 @@ const withAuth = require('../utils/auth');
 
 // get request to homepage
 router.get('/', async (req, res) => { 
-  console.log(res)
 
     try {
       // Get all projects and JOIN with user data
@@ -88,8 +87,6 @@ router.get('/profile/:userId', async (req, res) => {
   // get profile user id from URL
   const profileUserId = req.params.userId
 
-  console.log('hit')
-
   // find profile user by id and display their posts and the comments that goes along with them
   try {
     const profileUserData = await blogUser.findByPk(profileUserId)
@@ -135,7 +132,6 @@ router.get('/profile/:userId', async (req, res) => {
     const profileUserFollowers = profileUserFollowersData.map((follower) => follower.get({ plain: true }));
     profileUserFollowersIds = profileUserFollowers.map((followerObject) => followerObject.follower_id)
     
-    console.log(profileUserFollowersIds)
     const followersData = await blogUser.findAll({
       where: {
         id: profileUserFollowersIds

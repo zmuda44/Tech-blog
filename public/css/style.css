@@ -79,6 +79,10 @@ header a {
     padding: 5px;
 }
 
+.comment-content {
+    height: 200px;
+}
+
 .comments h3 {
     background-color: black;
     color: white;

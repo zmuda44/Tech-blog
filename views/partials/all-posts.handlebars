@@ -25,8 +25,8 @@
 
       <div class="comment-box" data-post-id="{{post.id}}">      
         <form>
-          <label for="comment-text-{{post.id}}">Comment</label>
-          <input type="text" class="comment-content" id="comment-input-post{{post.id}}">
+          <label for="comment-input-post{{post.id}}">Comment</label>
+          <textarea maxlength='220' class="comment-content" id="comment-input-post{{post.id}}" name="comment" maxlength="200" placeholder="Enter your comment"></textarea>
           <button class="comment-btn" data-post-id="{{post.id}}">submit</button>
         </form>        
       </div>
@@ -36,6 +36,7 @@
   {{/each}}
 
   {{/if}}
+  <script src="/js/all-posts.js"></script>
 </div>
 
 
