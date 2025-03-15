@@ -22,6 +22,8 @@ async function updatePost (e) {
   const user_id = titleEl.getAttribute('user-id')
   const postId = this.getAttribute('post-id') 
 
+  console.log(user_id)
+
   if (title && content && user_id) {
 
     const response = await fetch(`/api/posts/${postId}`, {
@@ -30,6 +32,8 @@ async function updatePost (e) {
       headers: { 'Content-Type': 'application/json' },
     });
 
+    const message = await response.JSON
+    console.log(message)
     if (response.ok) {
 
       document.location.replace('/dashboard');
@@ -86,8 +90,6 @@ async function newPost (e) {
           alert(response.statusText);
         }
     }
-
-
 };
 
 
@@ -100,7 +102,6 @@ for (post of userPostEls) {
 
 document.querySelector('.new-post-btn').addEventListener('click', showForm)
 
-console.log(userPostEls)
 if (userPostEls.length !== 0) {
   updatePostBtn.addEventListener('click', updatePost);
   deletePostBtn.addEventListener('click', deletePost);
